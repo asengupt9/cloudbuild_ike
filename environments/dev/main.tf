@@ -1,3 +1,4 @@
+
 terraform {
   required_version = "~> 1.0.0"
 }
@@ -15,3 +16,4 @@ resource "google_service_account" "sadev" {
   account_id   = "saaccountdev"
   display_name = "arindamsvcd"
 }
+
