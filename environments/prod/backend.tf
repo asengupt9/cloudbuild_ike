@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = "cloudbuild-ike-tfstate"
+    bucket = "cloudbuild-ike_cloudbuild"
     prefix = "env/prod"
   }
 }
