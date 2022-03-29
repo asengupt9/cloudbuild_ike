@@ -34,6 +34,10 @@ resource "google_data_fusion_instance" "datafusion_test" {
   }
   version = "6.3.0"
   dataproc_service_account = data.google_app_engine_default_service_account.default.email
+
+  timeouts {
+    create = "60m"
+  }
 }
 
 data "google_app_engine_default_service_account" "default" {
