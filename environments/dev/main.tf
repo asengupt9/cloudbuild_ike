@@ -45,8 +45,6 @@ resource "google_data_fusion_instance" "datafusion_instance5" {
   }
   version = "6.3.0"
   dataproc_service_account = data.google_app_engine_default_service_account.default.email
-
-
  }
 
 data "google_app_engine_default_service_account" "default" {
@@ -71,7 +69,7 @@ resource "cdap_application" "pipeline" {
     "description": "Data Pipeline Application",
     "artifact": {
         "name": "cdap-data-pipeline",
-        "version": "6.4.1",
+        "version": "6.3.0",
         "scope": "SYSTEM"
     },
     "config": {
@@ -103,7 +101,7 @@ resource "cdap_application" "pipeline" {
                     "label": "BigQuery",
                     "artifact": {
                         "name": "google-cloud",
-                        "version": "0.17.3",
+                        "version": "0.16.0",
                         "scope": "SYSTEM"
                     },
                     "properties": {
@@ -137,7 +135,7 @@ resource "cdap_application" "pipeline" {
                     "label": "Pub/Sub",
                     "artifact": {
                         "name": "google-cloud",
-                        "version": "0.17.3",
+                        "version": "0.16.0",
                         "scope": "SYSTEM"
                     },
                     "properties": {
