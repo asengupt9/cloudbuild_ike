@@ -22,6 +22,7 @@ terraform {
 }
 
 provider "cdap" {
+  host  = "${google_data_fusion_instance.datafusion_instances.service_endpoint}/api/"
   # Configuration options
 }
 
