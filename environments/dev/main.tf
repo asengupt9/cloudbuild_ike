@@ -21,10 +21,7 @@ terraform {
   }
 }
 
-provider "cdap" {
-  host  = "${google_data_fusion_instance.datafusion_instances.service_endpoint}/api/"
-  # Configuration options
-}
+
 
 /*resource "google_service_account" "sadev" {
   account_id   = "saaccountdev"
@@ -52,8 +49,15 @@ resource "google_data_fusion_instance" "datafusion_instance5" {
 
  }
 
-
 data "google_app_engine_default_service_account" "default" {
+}
+
+data "google_client_config" "current" {}
+
+provider "cdap" {
+  host  = "${google_data_fusion_instance.datafusion_instances.service_endpoint}/api/"
+  token = data.google_client_config.current.access_token
+  # Configuration options
 }
 
 resource "cdap_application" "pipeline" {
