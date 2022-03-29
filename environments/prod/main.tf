@@ -17,7 +17,7 @@ resource "google_service_account" "saprod" {
   display_name = "arindamsvcp"
 }
 
-resource "google_data_fusion_instance" "extended_instance" {
+resource "google_data_fusion_instance" "datafusion_test" {
   name = "datafusion-test"
   description = "My Data Fusion instance"
   region = "us-central1"
