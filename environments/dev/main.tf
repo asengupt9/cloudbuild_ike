@@ -27,7 +27,7 @@ resource "google_data_fusion_instance" "datafusion_test" {
   labels = {
     example_key = "example_value"
   }
-  private_instance = true
+  private_instance = false
   network_config {
     network = "default"
     ip_allocation = "10.89.48.0/22"
