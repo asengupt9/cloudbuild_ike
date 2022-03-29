@@ -2,6 +2,7 @@ steps:
 - id: 'branch name'
   name: 'alpine'
   entrypoint: 'sh'  
+  timeout: 800s
   args: 
   - '-c'
   - | 
@@ -62,8 +63,7 @@ steps:
 # [START tf-apply]
 - id: 'tf apply'
   name: 'hashicorp/terraform:1.0.0'
-  timeout: "800s"
-  entrypoint: 'sh'
+   entrypoint: 'sh'
   args: 
   - '-c'
   - | 

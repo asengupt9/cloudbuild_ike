@@ -17,8 +17,8 @@ provider "google" {
   display_name = "arindamsvcd"
 }*/
 
-resource "google_data_fusion_instance" "datafusion_instance4" {
-  name = "datafusion4"
+resource "google_data_fusion_instance" "datafusion_instance5" {
+  name = "datafusion5"
   description = "My Data Fusion instance for test"
   region = "us-central1"
   type = "DEVELOPER"
