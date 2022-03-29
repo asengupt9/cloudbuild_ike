@@ -18,7 +18,7 @@ provider "google" {
 }*/
 
 resource "google_data_fusion_instance" "datafusion_instance" {
-  name = "datafusion-instance"
+  name = "datafusion1"
   description = "My Data Fusion instance"
   region = "us-central1"
   type = "DEVELOPER"
