@@ -33,6 +33,9 @@ resource "google_data_fusion_instance" "datafusion_test" {
     ip_allocation = "10.89.48.0/22"
   }
   version = "6.3.0"
-  dataproc_service_account = gcp-sa-datafusion.iam.gserviceaccount.com
+  dataproc_service_account = data.google_app_engine_default_service_account.default.email
+}
+
+data "google_app_engine_default_service_account" "default" {
 }
 
