@@ -35,8 +35,16 @@ resource "google_data_fusion_instance" "datafusion_instance5" {
   version = "6.3.0"
   dataproc_service_account = data.google_app_engine_default_service_account.default.email
 
+
  }
+
 
 data "google_app_engine_default_service_account" "default" {
 }
+
+resource "cdap_application" "pipeline" {
+    name = "example_pipeline"
+    spec = file("datapipe.json")
+}
+
 
