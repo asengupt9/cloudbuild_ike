@@ -2,7 +2,6 @@ steps:
 - id: 'branch name'
   name: 'alpine'
   entrypoint: 'sh' 
-  timeout: 800s 
   args: 
   - '-c'
   - | 
@@ -75,5 +74,7 @@ steps:
         echo "Branch '$BRANCH_NAME' does not represent an oficial environment."
         echo "*******************************************************************************"
       fi
+
+  timeout: 400s
 
 # [END tf-apply]      
