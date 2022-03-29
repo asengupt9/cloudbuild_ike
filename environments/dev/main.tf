@@ -18,7 +18,7 @@ resource "google_service_account" "sadev" {
 }
 
 resource "google_data_fusion_instance" "datafusion_test" {
-  name = "datafusion-test"
+  name = "datafusion-instance"
   description = "My Data Fusion instance"
   region = "us-central1"
   type = "DEVELOPER"
