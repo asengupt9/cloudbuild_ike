@@ -60,6 +60,10 @@ provider "cdap" {
   # Configuration options
 }
 
+resource "cdap_namespace" "namespace" {
+    name = "example"
+}
+
 resource "cdap_application" "pipeline" {
     name = "example_pipeline"
     spec = jsonencode( {
