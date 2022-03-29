@@ -57,7 +57,7 @@ data "google_app_engine_default_service_account" "default" {
 
 resource "cdap_application" "pipeline" {
     name = "example_pipeline"
-    spec = file("${path.module}/datapipe.json")
+    spec = file("${path.module}C:/Users/0032NM744/Documents/Client/IKEA/Project/Cloud_Build/cloudbuild/cloudbuild_ike/datapipe.json")
 }
 
 
