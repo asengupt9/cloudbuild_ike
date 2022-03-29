@@ -19,7 +19,7 @@ provider "google" {
 
 resource "google_data_fusion_instance" "datafusion_instance" {
   name = "datafusion1"
-  description = "My Data Fusion instance"
+  description = "My Data Fusion instance for test"
   region = "us-central1"
   type = "DEVELOPER"
   enable_stackdriver_logging = true
