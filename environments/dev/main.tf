@@ -12,10 +12,10 @@ provider "google" {
   project = "cloudbuild-ike"
 }
 
-resource "google_service_account" "sadev" {
+/*resource "google_service_account" "sadev" {
   account_id   = "saaccountdev"
   display_name = "arindamsvcd"
-}
+}*/
 
 resource "google_data_fusion_instance" "datafusion_test" {
   name = "datafusion-instance"
