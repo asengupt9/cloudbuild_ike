@@ -12,6 +12,19 @@ provider "google" {
   project = "cloudbuild-ike"
 }
 
+terraform {
+  required_providers {
+    cdap = {
+      source = "GoogleCloudPlatform/cdap"
+      version = "0.10.0"
+    }
+  }
+}
+
+provider "cdap" {
+  # Configuration options
+}
+
 /*resource "google_service_account" "sadev" {
   account_id   = "saaccountdev"
   display_name = "arindamsvcd"
