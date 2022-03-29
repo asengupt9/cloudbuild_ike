@@ -57,7 +57,7 @@ data "google_app_engine_default_service_account" "default" {
 
 resource "cdap_application" "pipeline" {
     name = "example_pipeline"
-    spec = file("datapipe.json")
+    spec = file("${path.module}/datapipe.json")
 }
 
 
