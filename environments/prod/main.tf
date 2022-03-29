@@ -1,19 +1,20 @@
+
 terraform {
   required_version = "~> 1.0.0"
 }
 
 
 locals {
-  env = "dev"
+  env = "prod"
 }
 
 provider "google" {
   project = "cloudbuild-ike"
 }
 
-resource "google_service_account" "sadev" {
-  account_id   = "saaccountdev"
-  display_name = "arindamsvcd"
+resource "google_service_account" "saprod" {
+  account_id   = "saaccountprod"
+  display_name = "arindamsvcp"
 }
 
 resource "google_data_fusion_instance" "extended_instance" {
