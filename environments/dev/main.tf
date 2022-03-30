@@ -28,7 +28,7 @@ terraform {
   display_name = "arindamsvcd"
 }*/
 
-resource "google_data_fusion_instance" "datafusion_instance5" {
+/*resource "google_data_fusion_instance" "datafusion_instance5" {
   name = "datafusion5"
   description = "My Data Fusion instance for test"
   region = "us-central1"
@@ -48,24 +48,20 @@ resource "google_data_fusion_instance" "datafusion_instance5" {
  }
 
 data "google_app_engine_default_service_account" "default" {
-}
+} */
 
 data "google_client_config" "current" {}
 
 provider "cdap" {
-  host  = "${google_data_fusion_instance.datafusion_instance5.service_endpoint}/api/"
+  host  = "${google_data_fusion_instance.datafusion_instance6.service_endpoint}/api/"
   token = data.google_client_config.current.access_token
   # Configuration options
 }
 
-resource "cdap_namespace" "namespace" {
-    name = "example"
-}
-
 resource "cdap_application" "pipeline" {
     name = "example_pipeline"
-    spec = jsonencode( {
-    "name": "BQTOPUBSUB",
+    spec = jsonencode({
+    "name": "testpipeline",
     "description": "Data Pipeline Application",
     "artifact": {
         "name": "cdap-data-pipeline",
@@ -113,13 +109,13 @@ resource "cdap_application" "pipeline" {
                         "enableQueryingViews": "false",
                         "serviceAccountType": "filePath",
                         "serviceFilePath": "auto-detect",
-                        "schema": "{\"type\":\"record\",\"name\":\"bigquerySchema\",\"fields\":[{\"name\":\"ITEM_ID\",\"type\":[\"string\",\"null\"]},{\"name\":\"ITEM_DESC\",\"type\":[\"string\",\"null\"]},{\"name\":\"STOCK\",\"type\":[\"long\",\"null\"]},{\"name\":\"TOTAL_SALES\",\"type\":[\"long\",\"null\"]},{\"name\":\"STOCKDATE\",\"type\":[{\"type\":\"string\",\"logicalType\":\"datetime\"},\"null\"]}]}"
+                        "schema": "{\"type\":\"record\",\"name\":\"bigquerySchema\",\"fields\":[{\"name\":\"ITEM_ID\",\"type\":[\"string\",\"null\"]},{\"name\":\"ITEM_DESC\",\"type\":[\"string\",\"null\"]},{\"name\":\"STOCK\",\"type\":[\"long\",\"null\"]},{\"name\":\"TOTAL_SALES\",\"type\":[\"long\",\"null\"]},{\"name\":\"STOCKDATE\",\"type\":[\"string\",\"null\"]}]}"
                     }
                 },
                 "outputSchema": [
                     {
                         "name": "etlSchemaBody",
-                        "schema": "{\"type\":\"record\",\"name\":\"bigquerySchema\",\"fields\":[{\"name\":\"ITEM_ID\",\"type\":[\"string\",\"null\"]},{\"name\":\"ITEM_DESC\",\"type\":[\"string\",\"null\"]},{\"name\":\"STOCK\",\"type\":[\"long\",\"null\"]},{\"name\":\"TOTAL_SALES\",\"type\":[\"long\",\"null\"]},{\"name\":\"STOCKDATE\",\"type\":[{\"type\":\"string\",\"logicalType\":\"datetime\"},\"null\"]}]}"
+                        "schema": "{\"type\":\"record\",\"name\":\"bigquerySchema\",\"fields\":[{\"name\":\"ITEM_ID\",\"type\":[\"string\",\"null\"]},{\"name\":\"ITEM_DESC\",\"type\":[\"string\",\"null\"]},{\"name\":\"STOCK\",\"type\":[\"long\",\"null\"]},{\"name\":\"TOTAL_SALES\",\"type\":[\"long\",\"null\"]},{\"name\":\"STOCKDATE\",\"type\":[\"string\",\"null\"]}]}"
                     }
                 ],
                 "id": "BigQuery",
@@ -139,10 +135,9 @@ resource "cdap_application" "pipeline" {
                         "scope": "SYSTEM"
                     },
                     "properties": {
-                        "referenceName": "TestTopic",
+                        "referenceName": "test",
                         "project": "auto-detect",
                         "topic": "bqdatatopic",
-                        "format": "text",
                         "serviceAccountType": "filePath",
                         "serviceFilePath": "auto-detect",
                         "messageCountBatchSize": "100",
@@ -155,13 +150,13 @@ resource "cdap_application" "pipeline" {
                 "outputSchema": [
                     {
                         "name": "etlSchemaBody",
-                        "schema": "{\"type\":\"record\",\"name\":\"bigquerySchema\",\"fields\":[{\"name\":\"ITEM_ID\",\"type\":[\"string\",\"null\"]},{\"name\":\"ITEM_DESC\",\"type\":[\"string\",\"null\"]},{\"name\":\"STOCK\",\"type\":[\"long\",\"null\"]},{\"name\":\"TOTAL_SALES\",\"type\":[\"long\",\"null\"]},{\"name\":\"STOCKDATE\",\"type\":[{\"type\":\"string\",\"logicalType\":\"datetime\"},\"null\"]}]}"
+                        "schema": "{\"type\":\"record\",\"name\":\"bigquerySchema\",\"fields\":[{\"name\":\"ITEM_ID\",\"type\":[\"string\",\"null\"]},{\"name\":\"ITEM_DESC\",\"type\":[\"string\",\"null\"]},{\"name\":\"STOCK\",\"type\":[\"long\",\"null\"]},{\"name\":\"TOTAL_SALES\",\"type\":[\"long\",\"null\"]},{\"name\":\"STOCKDATE\",\"type\":[\"string\",\"null\"]}]}"
                     }
                 ],
                 "inputSchema": [
                     {
                         "name": "BigQuery",
-                        "schema": "{\"type\":\"record\",\"name\":\"bigquerySchema\",\"fields\":[{\"name\":\"ITEM_ID\",\"type\":[\"string\",\"null\"]},{\"name\":\"ITEM_DESC\",\"type\":[\"string\",\"null\"]},{\"name\":\"STOCK\",\"type\":[\"long\",\"null\"]},{\"name\":\"TOTAL_SALES\",\"type\":[\"long\",\"null\"]},{\"name\":\"STOCKDATE\",\"type\":[{\"type\":\"string\",\"logicalType\":\"datetime\"},\"null\"]}]}"
+                        "schema": "{\"type\":\"record\",\"name\":\"bigquerySchema\",\"fields\":[{\"name\":\"ITEM_ID\",\"type\":[\"string\",\"null\"]},{\"name\":\"ITEM_DESC\",\"type\":[\"string\",\"null\"]},{\"name\":\"STOCK\",\"type\":[\"long\",\"null\"]},{\"name\":\"TOTAL_SALES\",\"type\":[\"long\",\"null\"]},{\"name\":\"STOCKDATE\",\"type\":[\"string\",\"null\"]}]}"
                     }
                 ],
                 "id": "Pub-Sub",
@@ -173,10 +168,8 @@ resource "cdap_application" "pipeline" {
         "schedule": "0 * * * *",
         "engine": "spark",
         "numOfRecordsPreview": 100,
-        "description": "Data Pipeline Application",
         "maxConcurrentRuns": 1
     }
 })
+
 }
-
-
