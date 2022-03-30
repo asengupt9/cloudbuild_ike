@@ -22,13 +22,7 @@ terraform {
 }
 
 
-
-/*resource "google_service_account" "sadev" {
-  account_id   = "saaccountdev"
-  display_name = "arindamsvcd"
-}*/
-
-/*resource "google_data_fusion_instance" "datafusion_instance5" {
+resource "google_data_fusion_instance" "datafusion_instance5" {
   name = "datafusion5"
   description = "My Data Fusion instance for test"
   region = "us-central1"
@@ -48,9 +42,8 @@ terraform {
  }
 
 data "google_app_engine_default_service_account" "default" {
-} */
+} 
   
-
 
 data "google_client_config" "current" {}
 
