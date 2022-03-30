@@ -9,7 +9,7 @@ locals {
 
 provider "google" {
   project = "cloudbuild-ike"
-  credentials = "keys.json"
+  
 }
 
 terraform {
