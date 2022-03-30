@@ -1,29 +1,47 @@
 
 terraform {
-  required_version = "~> 1.0.0"
+  required_providers {
+    google = {
+      source = "hashicorp/google"
+      version = "4.13.0"
+    }
+    cdap = {
+      source = "GoogleCloudPlatform/cdap"
+      version = "0.10.0"
+  }
+}
 }
 
-
-locals {
-  env = "dev"
-}
+/*provider "google" {
+  project = "cloudbuild-ike"
+}*/
 
 provider "google" {
+  # Configuration options
   project = "cloudbuild-ike"
+  region = "us-central1"
+  zone = "us-central1-a"
+  credentials = "../keys.json"
 }
 
-terraform {
+/*terraform {
   required_providers {
     cdap = {
       source = "GoogleCloudPlatform/cdap"
       version = "0.10.0"
     }
   }
-}
+}*/
 
 
-resource "google_data_fusion_instance" "datafusion_instance6" {
-  name = "datafusion6"
+
+/*resource "google_service_account" "sadev" {
+  account_id   = "saaccountdev"
+  display_name = "arindamsvcd"
+}*/
+
+resource "google_data_fusion_instance" "datafusion_instance7" {
+  name = "datafusion7"
   description = "My Data Fusion instance for test"
   region = "us-central1"
   type = "DEVELOPER"
@@ -38,20 +56,20 @@ resource "google_data_fusion_instance" "datafusion_instance6" {
     ip_allocation = "10.89.48.0/22"
   }
   version = "6.3.0"
-  dataproc_service_account = data.google_app_engine_default_service_account.default.email
+  dataproc_service_account = "790790594498-compute@developer.gserviceaccount.com"
  }
 
-data "google_app_engine_default_service_account" "default" {
-} 
-  
+#data "google_app_engine_default_service_account" "default" {
+#}
 
 data "google_client_config" "current" {}
 
 provider "cdap" {
-  host  = "${google_data_fusion_instance.datafusion_instance6.service_endpoint}/api/"
+  host  = "${google_data_fusion_instance.datafusion_instance7.service_endpoint}/api/"
   token = data.google_client_config.current.access_token
   # Configuration options
 }
+
 
 resource "cdap_application" "pipeline" {
     name = "example_pipeline"
@@ -167,4 +185,9 @@ resource "cdap_application" "pipeline" {
     }
 })
 
+depends_on = [google_data_fusion_instance.datafusion_instance7]
 }
+
+
+
+
