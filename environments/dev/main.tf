@@ -9,6 +9,7 @@ locals {
 
 provider "google" {
   project = "cloudbuild-ike"
+  credentials = "keys.json"
 }
 
 terraform {
@@ -53,7 +54,7 @@ resource "google_data_fusion_instance" "datafusion_instance7" {
     ip_allocation = "10.89.48.0/22"
   }
   version = "6.3.0"
-  dataproc_service_account = data.google_app_engine_default_service_account.default.email
+  dataproc_service_account = "790790594498-compute@developer.gserviceaccount.com"
  }
 
 #data "google_app_engine_default_service_account" "default" {
