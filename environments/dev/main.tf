@@ -22,8 +22,8 @@ terraform {
 }
 
 
-resource "google_data_fusion_instance" "datafusion_instance5" {
-  name = "datafusion5"
+resource "google_data_fusion_instance" "datafusion_instance6" {
+  name = "datafusion6"
   description = "My Data Fusion instance for test"
   region = "us-central1"
   type = "DEVELOPER"
