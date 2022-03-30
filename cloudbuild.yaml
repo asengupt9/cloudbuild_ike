@@ -16,7 +16,7 @@ steps:
   - |
       if [ -d "environments/$BRANCH_NAME/" ]; then
         cd environments/$BRANCH_NAME
-        terraform import module.google_data_fusion_instance.datafusion_instance6 {{cloudbuild-ike}}/{{us-central1}}/{{datafusion6}}
+        terraform import google --resource=instances --region=us-central1 --project=cloudbuild-ike
       else
         for dir in environments/*/
         do 
@@ -27,7 +27,7 @@ steps:
           echo "*************** TERRAFORM IMPORT ******************"
           echo "******* At environment: ${env} ********"
           echo "*************************************************"
-          terraform import module.google_data_fusion_instance.datafusion_instance6 {{cloudbuild-ike}}/{{us-central1}}/{{datafusion6}} || exit 1
+          terraform import google --resource=instances --region=us-central1 --project=cloudbuild-ike || exit 1
           cd ../../
         done
       fi 
