@@ -41,6 +41,7 @@ steps:
   - | 
       if [ -d "environments/$BRANCH_NAME/" ]; then
         cd environments/$BRANCH_NAME
+        terraform import google_data_fusion_instance.default {{cloudbuild-ike}}/{{us-central1}}/{{datafusion6}}
         terraform plan
       else
         for dir in environments/*/
