@@ -33,6 +33,31 @@ steps:
         done
       fi 
 
+- id: 'tf import'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - |
+      if [ -d "environments/$BRANCH_NAME/" ]; then
+        cd environments/$BRANCH_NAME
+        terraform import google_data_fusion_instance.datafusion_instance6 {{cloudbuild-ike}}/{{us-central1}}/{{datafusion7}}
+      else
+        for dir in environments/*/
+        do 
+          cd ${dir}   
+          env=${dir%*/}
+          env=${env#*/}
+          echo ""
+          echo "*************** TERRAFORM INIT ******************"
+          echo "******* At environment: ${env} ********"
+          echo "*************************************************"
+          terraform import google_data_fusion_instance.datafusion_instance6 {{cloudbuild-ike}}/{{us-central1}}/{{datafusion7}} || exit 1
+          cd ../../
+        done
+      fi 
+
+
 # [START tf-plan]
 - id: 'tf plan'
   name: 'hashicorp/terraform:1.0.0'
