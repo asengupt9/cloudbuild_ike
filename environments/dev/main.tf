@@ -50,7 +50,7 @@ terraform {
 data "google_app_engine_default_service_account" "default" {
 } */
   
-resource "google_data_fusion_instance" "datafusion_instance6" { }
+
 
 data "google_client_config" "current" {}
 
