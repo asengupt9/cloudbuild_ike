@@ -1,28 +1,25 @@
+terraform {
+  required_version = "~> 1.0.0"
+}
+
+
+locals {
+  env = "dev"
+}
+
+provider "google" {
+  project = "cloudbuild-ike"
+}
 
 terraform {
   required_providers {
-    google = {
-      source = "hashicorp/google"
-      version = "4.13.0"
-    }
     cdap = {
       source = "GoogleCloudPlatform/cdap"
       version = "0.10.0"
+    }
   }
 }
-}
 
-/*provider "google" {
-  project = "cloudbuild-ike"
-}*/
-
-provider "google" {
-  # Configuration options
-  project = "cloudbuild-ike"
-  region = "us-central1"
-  zone = "us-central1-a"
-  credentials = "../keys.json"
-}
 
 /*terraform {
   required_providers {
