@@ -8,7 +8,7 @@ steps:
       echo "***********************"
       echo "$BRANCH_NAME"
       echo "***********************"
-timeout: 660s
+
 - id: 'tf init'
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
@@ -32,7 +32,6 @@ timeout: 660s
           cd ../../
         done
       fi 
-timeout: 1000s
 
 # [START tf-plan]
 - id: 'tf plan'
@@ -59,7 +58,7 @@ timeout: 1000s
         done
       fi 
 # [END tf-plan]
-timeout: 1000s
+
 # [START tf-apply]
 - id: 'tf apply'
   timeout: 800s
