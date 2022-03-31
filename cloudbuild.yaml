@@ -8,7 +8,7 @@ steps:
       echo "***********************"
       echo "$BRANCH_NAME"
       echo "***********************"
-
+timeout: 1000s
 - id: 'tf init'
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
@@ -32,31 +32,7 @@ steps:
           cd ../../
         done
       fi 
-
-- id: 'tf import'
-  name: 'hashicorp/terraform:1.0.0'
-  entrypoint: 'sh'
-  args: 
-  - '-c'
-  - |
-      if [ -d "environments/$BRANCH_NAME/" ]; then
-        cd environments/$BRANCH_NAME
-        terraform import google_data_fusion_instance.datafusion_instance7 {{cloudbuild-ike}}/{{us-central1}}/{{datafusion7}}
-      else
-        for dir in environments/*/
-        do 
-          cd ${dir}   
-          env=${dir%*/}
-          env=${env#*/}
-          echo ""
-          echo "*************** TERRAFORM INIT ******************"
-          echo "******* At environment: ${env} ********"
-          echo "*************************************************"
-          terraform import google_data_fusion_instance.datafusion_instance7 {{cloudbuild-ike}}/{{us-central1}}/{{datafusion7}} || exit 1
-          cd ../../
-        done
-      fi 
-
+timeout: 1000s
 
 # [START tf-plan]
 - id: 'tf plan'
@@ -83,7 +59,7 @@ steps:
         done
       fi 
 # [END tf-plan]
-
+timeout: 1000s
 # [START tf-apply]
 - id: 'tf apply'
   timeout: 800s
@@ -100,6 +76,6 @@ steps:
         echo "Branch '$BRANCH_NAME' does not represent an oficial environment."
         echo "*******************************************************************************"
       fi
-  
+timeout: 1000s  
 
 # [END tf-apply]      
