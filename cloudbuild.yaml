@@ -78,7 +78,7 @@ steps:
   timeout: 1600s    
 
 # [START tf-destroy]
-- id: 'tf apply'
+- id: 'tf destroy'
   timeout: 800s
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
