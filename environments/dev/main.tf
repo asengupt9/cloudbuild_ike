@@ -71,7 +71,7 @@ provider "cdap" {
 
 resource "cdap_application" "pipeline" {
     name = "example_pipeline"
-    spec = file("${path.module}./pipeline.json")
+    spec = file("${path.module}/pipeline.json")
    /* spec = jsonencode({
     "name": "testpipeline",
     "description": "Data Pipeline Application",
